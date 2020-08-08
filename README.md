@@ -13,7 +13,7 @@ STDOUT (a) <-- ||   || <--(socket/b2a)---- STDOUT (b) <-- ||   ||
                                |                                 
 ```
 
-Namely, you can interact with `b` through `a`'s stdio.
+That is, you can interact with `b` through `a`'s stdio.
 
 ## Usage
 1. Open a terminal and execute as follows:
@@ -41,3 +41,13 @@ The results of b: (they are written to stderr)
 scanned x = 1234
 scanned msg = hello
 ```
+
+## How?
+
+`a` side:
+1. Read bytes from stdin and write them all into the socket.
+2. Read bytes from the socket and write them all into stdout.
+
+`b` side
+1. `dup2(socket, 0)`
+2. `dup2(socket, 1)`
