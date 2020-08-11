@@ -49,9 +49,9 @@ int main(void) {
     struct sockaddr_in client;
     socklen_t client_addr_size = sizeof client;
     int fd = accept(sock, (struct sockaddr *)&client, &client_addr_size);
-    dup2(fd, 0);
-    dup2(fd, 1);
-    // dup2(fd, 2);
+    dup2(fd, STDIN_FILENO);
+    dup2(fd, STDOUT_FILENO);
+    // dup2(fd, STDERR_FILENO);
 
     do_something();
 

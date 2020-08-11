@@ -32,9 +32,9 @@ int main(void) {
     goto close_a2b;
   }
 
-  dup2(a2b, 0);
-  dup2(b2a, 1);
-  // dup2(b2a, 2);
+  dup2(a2b, STDIN_FILENO);
+  dup2(b2a, STDOUT_FILENO);
+  // dup2(b2a, STDERR_FILENO);
 
   do_something();
 
