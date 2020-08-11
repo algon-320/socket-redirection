@@ -35,6 +35,12 @@ int main(void) {
   addr.sin_port = htons(LISTEN_PORT);
   addr.sin_addr.s_addr = INADDR_ANY;
 
+  int yes = 1;
+  if (setsockopt(sock, SOL_SOCKET, SO_REUSEADDR, (const char *)&yes, sizeof yes) == -1) {
+    perror("setsockopt");
+    exit(EXIT_FAILURE);
+  }
+
   if (bind(sock, (struct sockaddr *)&addr, sizeof addr) == -1) {
     perror("bind");
     exit(EXIT_FAILURE);
